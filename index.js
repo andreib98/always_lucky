@@ -35,7 +35,7 @@ app.use(express.json());
 
 app.use(cors({
 
-    origin: ["http://localhost:5173"],
+    origin: ["http://34.16.151.166:8080"],
     methods: ["GET","POST"],
     credentials: true,
 
@@ -966,7 +966,7 @@ app.get("/", (req, res) => {
 
 });
 
-server.listen(3001, () =>{
+server.listen(8081, () =>{
     console.log("SERVER IS ONLINE");
 });
 
