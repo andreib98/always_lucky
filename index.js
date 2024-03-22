@@ -35,7 +35,7 @@ app.use(express.json());
 
 app.use(cors({
 
-    origin: ["http://localhost:8080"],
+    origin: ["http://34.16.151.166:8080"],
     methods: ["GET","POST"],
     credentials: true,
 
@@ -193,7 +193,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors:{
-        origin: "http://localhost:8080",
+        origin: "http://34.16.151.166:8080",
         methods: ["GET", "POST"],
     }
 });
