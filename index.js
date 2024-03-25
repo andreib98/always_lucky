@@ -429,7 +429,7 @@ io.on("connection", function(socket) {
                 if (err) console.log(err);
             });
 
-            io.to(clientRoom).emit('round_over', p1chips, p2chips);
+            io.to(clientRoom).emit('round_folded', p1chips, p2chips);
 
         });
         
@@ -571,7 +571,7 @@ io.on("connection", function(socket) {
             if (err) console.log(err);
             });
 
-            if ( status == "river" ){
+            if ( status == "river" || p1chips == 0 || p2chips == 0 ){
                 var sql3 = `UPDATE games SET gameStatus="showdown" WHERE roomID=${clientRoom};`;
                 status = "showdown";
             }
