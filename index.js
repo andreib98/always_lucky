@@ -518,8 +518,8 @@ io.on("connection", function(socket) {
                         var p2c2v = result[0].p2c2v;
                         var p2c2s = result[0].p2c2s;
     
-                        io.to(p1id).emit('opp_cards', p2c1v, p2c1s, p2c2v, p2c2s);
-                        io.to(p2id).emit('opp_cards', p1c1v, p1c1s, p1c2v, p1c2s);
+                        io.to(p1id).emit('opp_cards', p2c1v, p2c1s, p2c2v, p2c2s, pot);
+                        io.to(p2id).emit('opp_cards', p1c1v, p1c1s, p1c2v, p1c2s, pot);
                     });
                 }
 
@@ -616,8 +616,8 @@ io.on("connection", function(socket) {
                     var p2c2v = result[0].p2c2v;
                     var p2c2s = result[0].p2c2s;
 
-                    io.to(p1id).emit('opp_cards', p2c1v, p2c1s, p2c2v, p2c2s);
-                    io.to(p2id).emit('opp_cards', p1c1v, p1c1s, p1c2v, p1c2s);
+                    io.to(p1id).emit('opp_cards', p2c1v, p2c1s, p2c2v, p2c2s, pot);
+                    io.to(p2id).emit('opp_cards', p1c1v, p1c1s, p1c2v, p1c2s, pot);
                 });
                 
             }
@@ -823,48 +823,48 @@ io.on("connection", function(socket) {
                     if ( flush ){
                         if ( straight ){
                             hr = 10;
-                            socket.emit('showdown', "Royal Flush!", id);
+                            io.to(clientRoom).emit('showdown', "Royal Flush!", id);
                         }
                         else{
                             hr = 6;
-                            socket.emit('showdown', "Flush!", id);
+                            io.to(clientRoom).emit('showdown', "Flush!", id);
                         }
                     }
                     else{
                         if ( straight ){
                             hr = 5;
-                            socket.emit('showdown', "Straight!", id);
+                            io.to(clientRoom).emit('showdown', "Straight!", id);
                         }
                         else{
                             if ( most_dup == 4 ){
                                 hr = 8;
-                                socket.emit('showdown', "Quads!", id);
+                                io.to(clientRoom).emit('showdown', "Quads!", id);
                             }
                             else{
                                 if ( most_dup == 3 ){
                                     if ( most_dup_2 >= 2 ){
                                         hr = 7;
-                                        socket.emit('showdown', "Full House!", id);
+                                        io.to(clientRoom).emit('showdown', "Full House!", id);
                                     }
                                     else{
                                         hr = 4;
-                                        socket.emit('showdown', "Trips!", id);
+                                        io.to(clientRoom).emit('showdown', "Trips!", id);
                                     }
                                 }
                                 else{
                                     if ( most_dup == 2){
                                         if ( most_dup_2 == 2){
                                             hr = 3;
-                                            socket.emit('showdown', "Two Pairs!", id);
+                                            io.to(clientRoom).emit('showdown', "Two Pairs!", id);
                                         }
                                         else{
                                             hr = 2;
-                                            socket.emit('showdown', "One Pair!", id);
+                                            io.to(clientRoom).emit('showdown', "One Pair!", id);
                                         }
                                     }
                                     else{
                                         hr = 1;
-                                        socket.emit('showdown', "High Card!", id);
+                                        io.to(clientRoom).emit('showdown', "High Card!", id);
                                     }
                                 }
                             }
